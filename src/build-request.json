@@ -1,77 +1,53 @@
 {
   "kind": "build_request",
-  "title": "Fix Learning Modes access, add premium in-app purchase option, and expand subjects (English Grammar & Hindi Vyakaran)",
+  "title": "Replace Learning Mode placeholder with working interactive content",
   "projectName": "Class 10 Learning Hub",
-  "priority": "high",
+  "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-7",
-      "text": "Fix the issue where Learning Modes are not accessible by ensuring that Learning Modes navigation and launching a mode works from all entry points (Primary navigation, Home quick-access card, Learning Modes list Start button, and Chapter Detail Start Learning buttons), and that the Learning Mode Run page renders without errors for every modeId in the predefined list.",
+      "id": "REQ-10",
+      "text": "Replace the placeholder content in the Learning Mode Run page so that opening any learning mode shows real, mode-specific learning content and at least one interactive element (not just the message 'This learning mode is ready for you...'). The experience must work for all 20 predefined modeIds in frontend/src/data/learningModes.ts.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-3"
+          "msg-4"
         ],
         "quotes": [
-          "Learning modes are not accessible"
+          "When I am clicking any learning modes only message appears This learning mode is ready for you. Content and interactive exercises will be displayed here. Fix above error"
         ]
       },
       "acceptanceCriteria": [
-        "Clicking “Learning Modes” in the primary navigation opens the Learning Modes page.",
-        "Clicking “Explore Modes” on the Home page opens the Learning Modes page.",
-        "Clicking “Start” on any Learning Mode card navigates to /learning-modes/{modeId} and renders the run page (no blank page, no console errors).",
-        "From any Chapter Detail page, selecting any learning mode navigates to the run page and preserves the selected chapter context (subject and chapterId visible on the run page when provided)."
+        "Navigating to /learning-modes/$modeId for each of the 20 learningModes renders mode-specific UI (not the generic placeholder block currently shown in LearningModeRunPage).",
+        "Each mode includes at least one interactive control (e.g., selectable answer choices, flip/reveal, check answer, next/previous, timer start/stop) that changes UI state.",
+        "No console errors occur when launching any mode from Learning Modes list or Chapter Detail page."
       ]
     },
     {
-      "id": "REQ-8",
-      "text": "Add two new subjects to the chapter catalog—“English Grammar” and “Hindi Vyakaran”—including a complete chapter/topic list for each subject, and make them fully usable anywhere the subject list appears (Chapters tabs/list, Chapter detail routing, and any chapter-driven learning mode launch).",
+      "id": "REQ-11",
+      "text": "When a chapter context is provided (via search params subject and chapterId), show chapter-tailored content for the selected learning mode; when chapter context is missing, keep the existing 'Choose a Chapter' call-to-action and ensure the mode UI clearly indicates that chapter selection is required for chapter-specific practice.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-3"
+          "msg-4"
         ],
         "quotes": [
-          "add 2more subjects with all NCERT chapters english grammar and hindi vyakran"
+          "When I am clicking any learning modes only message appears This learning mode is ready for you. Content and interactive exercises will be displayed here. Fix above error"
         ]
       },
       "acceptanceCriteria": [
-        "The Chapters page shows two additional selectable subjects: “English Grammar” and “Hindi Vyakaran”.",
-        "Each of the two new subjects displays its full chapter/topic list with chapter numbering, and each chapter opens a Chapter Detail page.",
-        "Learning modes can be launched from the new subjects’ Chapter Detail pages the same way as existing subjects (navigating to the run page with subject + chapterId in context)."
-      ]
-    },
-    {
-      "id": "REQ-9",
-      "text": "Add an in-app purchase (IAP) option that allows users to upgrade to a Premium status within the app UI, including a clear Premium/Upgrade entry point in Settings and persistent storage of the user’s Premium status keyed by their Internet Identity principal.",
-      "target": "both",
-      "source": {
-        "messageIds": [
-          "msg-3"
-        ],
-        "quotes": [
-          "add in app purchase option"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Settings includes a clearly labeled section for Premium (e.g., “Premium” / “Upgrade”).",
-        "The user can initiate an “Upgrade to Premium” flow from within the app UI.",
-        "After upgrading, the app shows the user as Premium (e.g., a badge/label in the Premium section) and this state persists across reloads and sessions for the same Internet Identity principal.",
-        "Backend exposes APIs to read the caller’s Premium status and to set Premium status for the caller (with appropriate access control so a user can only affect their own status).",
-        "The app works when not logged in: it should prompt the user to log in with Internet Identity before completing an upgrade, while still allowing browsing of existing content."
+        "Launching a learning mode from ChapterDetailPage (which passes subject and chapterId) shows content that references the selected chapter (e.g., chapter title/number) within the mode’s main content area.",
+        "Launching a learning mode from LearningModesPage without a chapter selected does not show the broken/empty placeholder; it shows a usable mode landing state plus a working 'Choose a Chapter' button linking to /chapters.",
+        "Invalid subject/chapterId values in the URL do not crash the page; the UI falls back to the non-chapter mode landing state and still renders mode-specific UI."
       ]
     }
   ],
   "constraints": [
-    "Do not edit files under frontend/src/components/ui (Shadcn UI components must be composed, not modified).",
-    "Do not modify immutable hook files: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx.",
-    "Backend must remain a single Motoko actor with logic in backend/main.mo; add backend/migration.mo only if state upgrades require it.",
-    "Use English for any new user-facing text added by these changes."
+    "Do not edit any files under frontend/src/components/ui (Shadcn UI components must be composed, not modified).",
+    "Do not modify frontend immutable paths listed in SYSTEM_CONTEXT (Internet Identity and actor hooks, and main.tsx are read-only)."
   ],
   "nonGoals": [
-    "Integrating third-party mobile app store purchases (Google Play / App Store) is out of scope.",
-    "Implementing real payment processing (e.g., Stripe) is out of scope unless credentials and product/price configuration are provided.",
-    "Adding new learning modes beyond the existing 20 is out of scope."
+    "Do not add external APIs or online content fetching to populate learning mode content.",
+    "Do not implement full NCERT textbook content ingestion/parsing as part of this fix."
   ],
   "imageRequirements": {
     "required": [],

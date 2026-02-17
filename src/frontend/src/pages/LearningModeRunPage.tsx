@@ -4,10 +4,12 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
-import { ArrowLeft, BookOpen, AlertCircle } from 'lucide-react';
+import { ArrowLeft, BookOpen, AlertCircle, Info } from 'lucide-react';
 import { learningModes } from '../data/learningModes';
 import { ncertClass10Chapters, subjects } from '../data/ncertClass10Chapters';
 import LearningModeIcon from '../components/learning-modes/LearningModeIcon';
+import LearningModeActivityRenderer from '../components/learning-modes/run/LearningModeActivityRenderer';
+import type { ChapterContext } from '../data/learningModeActivities';
 
 export default function LearningModeRunPage() {
   const params = useParams({ strict: false });
@@ -15,9 +17,22 @@ export default function LearningModeRunPage() {
   
   const modeId = params.modeId || '';
   const mode = learningModes.find((m) => m.id === modeId);
+  
+  // Validate chapter context
   const subjectData = search.subject ? subjects.find((s) => s.id === search.subject) : undefined;
   const chapter = search.subject && search.chapterId 
     ? ncertClass10Chapters[search.subject]?.find((c) => c.id === search.chapterId)
+    : undefined;
+
+  // Only consider chapter context valid if both subject and chapter are resolved
+  const hasValidChapterContext = !!(subjectData && chapter);
+
+  const chapterContext: ChapterContext | undefined = hasValidChapterContext
+    ? {
+        subjectName: subjectData.name,
+        chapterNumber: chapter.number,
+        chapterTitle: chapter.title,
+      }
     : undefined;
 
   if (!mode) {
@@ -70,48 +85,52 @@ export default function LearningModeRunPage() {
               <p className="text-muted-foreground">{mode.description}</p>
             </div>
           </div>
-          {chapter && subjectData && (
+          {chapterContext && (
             <div className="flex items-center gap-2 mt-4">
               <Badge variant="secondary" className="gap-1">
                 <BookOpen className="h-3 w-3" />
-                {subjectData.name} - Chapter {chapter.number}: {chapter.title}
+                {chapterContext.subjectName} - Chapter {chapterContext.chapterNumber}: {chapterContext.chapterTitle}
               </Badge>
             </div>
           )}
         </div>
       </div>
 
+      {!chapterContext && (
+        <Alert>
+          <Info className="h-4 w-4" />
+          <AlertTitle>Practice Mode</AlertTitle>
+          <AlertDescription>
+            You're practicing in general mode. For chapter-specific content, select a chapter from the Chapters page and launch this learning mode from there.
+          </AlertDescription>
+        </Alert>
+      )}
+
       <Card>
         <CardHeader>
           <CardTitle>Learning Content</CardTitle>
           <CardDescription>
-            {chapter 
-              ? `Practice ${mode.name.toLowerCase()} for ${chapter.title}`
+            {chapterContext 
+              ? `Practice ${mode.name.toLowerCase()} for ${chapterContext.chapterTitle}`
               : `Start practicing with ${mode.name.toLowerCase()}`
             }
           </CardDescription>
         </CardHeader>
-        <CardContent className="min-h-[400px] flex items-center justify-center">
-          <div className="text-center space-y-4 max-w-md">
-            <div className="h-24 w-24 rounded-full bg-primary/10 flex items-center justify-center mx-auto">
-              <LearningModeIcon modeId={mode.id} className="h-12 w-12" />
-            </div>
-            <h3 className="text-xl font-semibold">Ready to Learn!</h3>
-            <p className="text-muted-foreground">
-              This learning mode is ready for you. Content and interactive exercises will be displayed here.
-              {!chapter && ' Select a chapter from the Chapters page to start with specific content.'}
-            </p>
-            {!chapter && (
-              <Link to="/chapters">
-                <Button className="mt-4">
-                  <BookOpen className="h-4 w-4 mr-2" />
-                  Choose a Chapter
-                </Button>
-              </Link>
-            )}
-          </div>
+        <CardContent className="min-h-[400px]">
+          <LearningModeActivityRenderer modeId={modeId} chapterContext={chapterContext} />
         </CardContent>
       </Card>
+
+      {!chapterContext && (
+        <div className="text-center py-6">
+          <Link to="/chapters">
+            <Button size="lg">
+              <BookOpen className="h-4 w-4 mr-2" />
+              Choose a Chapter for Specific Practice
+            </Button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

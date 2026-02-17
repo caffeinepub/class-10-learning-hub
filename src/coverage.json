@@ -1,88 +1,79 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-17T01:29:48.832Z",
+  "generatedAt": "2026-02-17T01:38:48.274Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 3,
-    "implemented": 3,
+    "total": 2,
+    "implemented": 2,
     "items": [
       {
-        "id": "REQ-7",
-        "summary": "Fix the issue where Learning Modes are not accessible by ensuring that Learning Modes navigation and launching a mode works from all entry points (Primary navigation, Home quick-access card, Learning Modes list Start button, and Chapter Detail Start Learning buttons), and that the Learning Mode Run page renders without errors for every modeId in the predefined list.",
+        "id": "REQ-10",
+        "summary": "Replace the placeholder content in the Learning Mode Run page so that opening any learning mode shows real, mode-specific learning content and at least one interactive element (not just the message 'This learning mode is ready for you...'). The experience must work for all 20 predefined modeIds in frontend/src/data/learningModes.ts.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/LearningModeRunPage.tsx",
-          "frontend/src/pages/LearningModesPage.tsx",
-          "frontend/src/pages/ChapterDetailPage.tsx",
-          "frontend/src/App.tsx"
+          "frontend/src/data/learningModeActivities.ts",
+          "frontend/src/components/learning-modes/run/LearningModeActivityRenderer.tsx",
+          "frontend/src/components/learning-modes/run/modes/FlashcardsMode.tsx",
+          "frontend/src/components/learning-modes/run/modes/QuizMode.tsx",
+          "frontend/src/components/learning-modes/run/modes/FillBlanksMode.tsx",
+          "frontend/src/components/learning-modes/run/modes/MatchFollowingMode.tsx",
+          "frontend/src/components/learning-modes/run/modes/TrueFalseMode.tsx",
+          "frontend/src/components/learning-modes/run/modes/TimerChallengeMode.tsx",
+          "frontend/src/components/learning-modes/run/modes/NotesSummaryMode.tsx",
+          "frontend/src/components/learning-modes/run/modes/PracticeProblemsMode.tsx",
+          "frontend/src/pages/LearningModeRunPage.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/pages/LearningModeRunPage.tsx",
-          "frontend/src/pages/ChapterDetailPage.tsx",
-          "frontend/src/App.tsx"
+          "frontend/src/data/learningModeActivities.ts",
+          "frontend/src/components/learning-modes/run/LearningModeActivityRenderer.tsx",
+          "frontend/src/components/learning-modes/run/modes/FlashcardsMode.tsx",
+          "frontend/src/components/learning-modes/run/modes/QuizMode.tsx",
+          "frontend/src/components/learning-modes/run/modes/FillBlanksMode.tsx",
+          "frontend/src/components/learning-modes/run/modes/MatchFollowingMode.tsx",
+          "frontend/src/components/learning-modes/run/modes/TrueFalseMode.tsx",
+          "frontend/src/components/learning-modes/run/modes/TimerChallengeMode.tsx",
+          "frontend/src/components/learning-modes/run/modes/NotesSummaryMode.tsx",
+          "frontend/src/components/learning-modes/run/modes/PracticeProblemsMode.tsx",
+          "frontend/src/pages/LearningModeRunPage.tsx"
         ]
       },
       {
-        "id": "REQ-8",
-        "summary": "Add two new subjects to the chapter catalog—“English Grammar” and “Hindi Vyakaran”—including a complete chapter/topic list for each subject, and make them fully usable anywhere the subject list appears (Chapters tabs/list, Chapter detail routing, and any chapter-driven learning mode launch).",
+        "id": "REQ-11",
+        "summary": "When a chapter context is provided (via search params subject and chapterId), show chapter-tailored content for the selected learning mode; when chapter context is missing, keep the existing 'Choose a Chapter' call-to-action and ensure the mode UI clearly indicates that chapter selection is required for chapter-specific practice.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/data/ncertClass10Chapters.ts",
-          "frontend/src/pages/ChaptersPage.tsx",
-          "frontend/src/pages/ChapterDetailPage.tsx"
+          "frontend/src/pages/LearningModeRunPage.tsx",
+          "frontend/src/data/learningModeActivities.ts",
+          "frontend/src/components/learning-modes/run/LearningModeActivityRenderer.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/data/ncertClass10Chapters.ts",
-          "frontend/src/pages/ChaptersPage.tsx",
-          "frontend/src/pages/ChapterDetailPage.tsx"
-        ]
-      },
-      {
-        "id": "REQ-9",
-        "summary": "Add an in-app purchase (IAP) option that allows users to upgrade to a Premium status within the app UI, including a clear Premium/Upgrade entry point in Settings and persistent storage of the user’s Premium status keyed by their Internet Identity principal.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/hooks/usePremium.ts",
-          "frontend/src/components/settings/PremiumSettingsCard.tsx",
-          "frontend/src/pages/SettingsPage.tsx",
-          "frontend/src/hooks/useQueries.ts"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/settings/PremiumSettingsCard.tsx",
-          "frontend/src/pages/SettingsPage.tsx",
-          "frontend/src/hooks/useQueries.ts"
+          "frontend/src/pages/LearningModeRunPage.tsx",
+          "frontend/src/data/learningModeActivities.ts",
+          "frontend/src/components/learning-modes/run/LearningModeActivityRenderer.tsx"
         ]
       }
     ]
   },
   "changedFiles": [
-    "backend/authorization/MixinAuthorization.mo",
-    "backend/authorization/access-control.mo",
-    "backend/main.mo",
     "build-request.json",
-    "build-template/README.md",
-    "caffeine.lock.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/App.tsx",
-    "frontend/src/backend.d.ts",
-    "frontend/src/backend.ts",
-    "frontend/src/components/settings/PremiumSettingsCard.tsx",
-    "frontend/src/data/ncertClass10Chapters.ts",
-    "frontend/src/declarations/backend.did.d.ts",
-    "frontend/src/declarations/backend.did.js",
-    "frontend/src/hooks/useActor.ts",
-    "frontend/src/hooks/useQueries.ts",
-    "frontend/src/pages/ChapterDetailPage.tsx",
-    "frontend/src/pages/ChaptersPage.tsx",
+    "frontend/src/components/learning-modes/run/LearningModeActivityRenderer.tsx",
+    "frontend/src/components/learning-modes/run/modes/FillBlanksMode.tsx",
+    "frontend/src/components/learning-modes/run/modes/FlashcardsMode.tsx",
+    "frontend/src/components/learning-modes/run/modes/MatchFollowingMode.tsx",
+    "frontend/src/components/learning-modes/run/modes/NotesSummaryMode.tsx",
+    "frontend/src/components/learning-modes/run/modes/PracticeProblemsMode.tsx",
+    "frontend/src/components/learning-modes/run/modes/QuizMode.tsx",
+    "frontend/src/components/learning-modes/run/modes/TimerChallengeMode.tsx",
+    "frontend/src/components/learning-modes/run/modes/TrueFalseMode.tsx",
+    "frontend/src/data/learningModeActivities.ts",
     "frontend/src/pages/LearningModeRunPage.tsx",
-    "frontend/src/pages/SettingsPage.tsx",
-    "frontend/src/utils/urlParams.ts",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

@@ -2,11 +2,19 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-fix-the-issue-where-learning-modes-are-not-accessible-by-ensuring-that-learning-modes-navigation-and-launching-a-mode-works-from-all-entry-points-primary-navigation-home-quick-access-card-learning-modes-list-start-button-and-chapter-detail-start-learning-buttons-and-that-the-learning-mode-run-page-renders-without-errors-for-every-modeid-in-the-predefined-list",
-      "featureTitle": "Fix the issue where Learning Modes are not accessible by ensuring that Learning Modes navigation and launching a mode works from all entry points (Primary navigation, Home quick-access card, Learning Modes list Start button, and Chapter Detail Start Learning buttons), and that the Learning Mode Run page renders without errors for every modeId in the predefined list.",
+      "featureId": "feature-replace-the-placeholder-content-in-the-learning-mode-run-page-so-that-opening-any-learning-mode-shows-real-mode-specific-learning-content-and-at-least-one-interactive-element-not-just-the-message-this-learning-mode-is-ready-for-you-the-experience-must-work-for-all-20-predefined-modeids-in-frontend-src-data-learningmodes-ts",
+      "featureTitle": "Replace the placeholder content in the Learning Mode Run page so that opening any learning mode shows real, mode-specific learning content and at least one interactive element (not just the message 'This learning mode is ready for you...'). The experience must work for all 20 predefined modeIds in frontend/src/data/learningModes.ts.",
       "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/pages/ChapterDetailPage.tsx",
+        "frontend/src/components/learning-modes/run/LearningModeActivityRenderer.tsx",
+        "frontend/src/components/learning-modes/run/modes/FillBlanksMode.tsx",
+        "frontend/src/components/learning-modes/run/modes/FlashcardsMode.tsx",
+        "frontend/src/components/learning-modes/run/modes/MatchFollowingMode.tsx",
+        "frontend/src/components/learning-modes/run/modes/NotesSummaryMode.tsx",
+        "frontend/src/components/learning-modes/run/modes/PracticeProblemsMode.tsx",
+        "frontend/src/components/learning-modes/run/modes/QuizMode.tsx",
+        "frontend/src/components/learning-modes/run/modes/TimerChallengeMode.tsx",
+        "frontend/src/components/learning-modes/run/modes/TrueFalseMode.tsx",
+        "frontend/src/data/learningModeActivities.ts",
         "frontend/src/pages/LearningModeRunPage.tsx"
       ],
       "components": [
@@ -18,17 +26,17 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-7"
+        "REQ-10"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-add-two-new-subjects-to-the-chapter-catalog-english-grammar-and-hindi-vyakaran-including-a-complete-chapter-topic-list-for-each-subject-and-make-them-fully-usable-anywhere-the-subject-list-appears-chapters-tabs-list-chapter-detail-routing-and-any-chapter-driven-learning-mode-launch",
-      "featureTitle": "Add two new subjects to the chapter catalog—“English Grammar” and “Hindi Vyakaran”—including a complete chapter/topic list for each subject, and make them fully usable anywhere the subject list appears (Chapters tabs/list, Chapter detail routing, and any chapter-driven learning mode launch).",
+      "featureId": "feature-when-a-chapter-context-is-provided-via-search-params-subject-and-chapterid-show-chapter-tailored-content-for-the-selected-learning-mode-when-chapter-context-is-missing-keep-the-existing-choose-a-chapter-call-to-action-and-ensure-the-mode-ui-clearly-indicates-that-chapter-selection-is-required-for-chapter-specific-practice",
+      "featureTitle": "When a chapter context is provided (via search params subject and chapterId), show chapter-tailored content for the selected learning mode; when chapter context is missing, keep the existing 'Choose a Chapter' call-to-action and ensure the mode UI clearly indicates that chapter selection is required for chapter-specific practice.",
       "files": [
-        "frontend/src/data/ncertClass10Chapters.ts",
-        "frontend/src/pages/ChapterDetailPage.tsx",
-        "frontend/src/pages/ChaptersPage.tsx"
+        "frontend/src/components/learning-modes/run/LearningModeActivityRenderer.tsx",
+        "frontend/src/data/learningModeActivities.ts",
+        "frontend/src/pages/LearningModeRunPage.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -39,28 +47,7 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-8"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-add-an-in-app-purchase-iap-option-that-allows-users-to-upgrade-to-a-premium-status-within-the-app-ui-including-a-clear-premium-upgrade-entry-point-in-settings-and-persistent-storage-of-the-user-s-premium-status-keyed-by-their-internet-identity-principal",
-      "featureTitle": "Add an in-app purchase (IAP) option that allows users to upgrade to a Premium status within the app UI, including a clear Premium/Upgrade entry point in Settings and persistent storage of the user’s Premium status keyed by their Internet Identity principal.",
-      "files": [
-        "frontend/src/components/settings/PremiumSettingsCard.tsx",
-        "frontend/src/hooks/useQueries.ts",
-        "frontend/src/pages/SettingsPage.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-9"
+        "REQ-11"
       ],
       "confidence": "high"
     }

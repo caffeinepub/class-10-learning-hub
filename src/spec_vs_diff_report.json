@@ -1,65 +1,42 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-17T01:29:48.828Z",
-  "summary": "Diff implements Premium upgrade UI and backend APIs, adds two new subjects to the chapter catalog, and updates chapter detail + learning mode run pages to pass/preserve chapter context. However, some REQ-7 entry-point navigation fixes are not evidenced in the provided diff summary, and several backend/admin/profile capabilities appear beyond what was requested.",
+  "generatedAt": "2026-02-17T01:38:48.270Z",
+  "summary": "Diff adds an activity configuration layer and multiple interactive learning-mode UIs, and updates LearningModeRunPage to render mode-specific interactive content with optional chapter context. However, the diff summary does not provide sufficient evidence that all 20 predefined modeIds are supported by configurations and renderers, nor does it fully show the required non-chapter landing state/CTA details.",
   "missing_requirements": [
     {
-      "id": "REQ-7",
-      "requirement": "Ensure Learning Modes are accessible from all entry points (Primary navigation and Home quick-access 'Explore Modes' in addition to Learning Modes list and Chapter Detail), and that those entry points navigate correctly to the Learning Modes page.",
-      "reason": "The diff summary shows updates to ChapterDetailPage and LearningModeRunPage, but does not show any changes (or explicit evidence) for Primary navigation or Home page wiring for 'Learning Modes' / 'Explore Modes' entry points.",
+      "id": "REQ-10",
+      "requirement": "The experience must work for all 20 predefined modeIds in frontend/src/data/learningModes.ts (each /learning-modes/$modeId renders mode-specific UI, not a generic placeholder).",
+      "reason": "The diff shows an activity config map and renderer with 8 activity types, but the provided (truncated) config snippet only clearly includes a handful of modeIds (e.g., flashcards, quiz, mcq, fill-blanks, match). There is no explicit evidence in the diff summary that all 20 modeIds from learningModes.ts have corresponding entries in learningModeActivities.ts and thus render mode-specific UI.",
       "evidence": [
-        "frontend-file-summaries.txt (mentions PrimaryNav.tsx and HomePage.tsx but no corresponding modified-file diffs shown)",
-        "MODIFIED FILES list does not include frontend/src/components/nav/PrimaryNav.tsx or frontend/src/pages/HomePage.tsx"
+        "frontend/src/data/learningModeActivities.ts",
+        "frontend/src/components/learning-modes/run/LearningModeActivityRenderer.tsx"
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "requirement": "When chapter context is missing, show a usable mode landing state plus a working 'Choose a Chapter' button linking to /chapters, and clearly indicate chapter selection is required for chapter-specific practice.",
+      "reason": "LearningModeRunPage shows a conditional block for '!chapterContext' but the relevant section is truncated, so the diff summary does not confirm the presence of a 'Choose a Chapter' button linking to '/chapters' or the exact required messaging/state.",
+      "evidence": [
+        "frontend/src/pages/LearningModeRunPage.tsx"
       ]
     }
   ],
-  "hallucinated_features": [
-    {
-      "description": "Admin-only ability to downgrade another user from Premium.",
-      "reason": "REQ-9 only asks for reading and setting Premium status for the caller (so a user can only affect their own status). Admin downgrade of arbitrary users is not requested.",
-      "evidence": [
-        "backend/main.mo (public shared func downgradeFromPremium(user : Principal))"
-      ]
-    },
-    {
-      "description": "General user profile APIs beyond Premium status (get/save caller profile, get arbitrary user profile).",
-      "reason": "REQ-9 requires Premium status read/set keyed by principal; it does not request full profile CRUD or admin/profile viewing features.",
-      "evidence": [
-        "backend/main.mo (type UserProfile with name, isPremium; getCallerUserProfile, getUserProfile, saveCallerUserProfile)",
-        "frontend/src/hooks/useQueries.ts (useGetCallerUserProfile, useSaveCallerUserProfile)"
-      ]
-    },
-    {
-      "description": "Premium status check for arbitrary user principal (isUserPremium).",
-      "reason": "REQ-9 calls for APIs to read the caller’s Premium status and to set Premium status for the caller; arbitrary-user premium lookup is not requested.",
-      "evidence": [
-        "backend/main.mo (public query func isUserPremium(user : Principal))"
-      ]
-    },
-    {
-      "description": "URL/session parameter utilities and admin-token style parameter persistence (e.g., sessionStorage-backed persisted URL parameters) unrelated to Learning Modes, new subjects, or Premium upgrade flow.",
-      "reason": "Not requested by REQ-7/8/9; appears to support separate secret-token/admin initialization behavior.",
-      "evidence": [
-        "frontend/src/utils/urlParams.ts",
-        "frontend/src/hooks/useActor.ts (imports getSecretParameter from ../utils/urlParams; uses caffeineAdminToken and _initializeAccessControlWithSecret)"
-      ]
-    }
-  ],
-  "confidence": 0.63,
+  "hallucinated_features": [],
+  "confidence": 0.55,
   "changed_files": [
-    "backend/main.mo",
     "frontend-file-summaries.txt",
-    "frontend/src/App.tsx",
-    "frontend/src/components/settings/PremiumSettingsCard.tsx",
-    "frontend/src/data/ncertClass10Chapters.ts",
-    "frontend/src/hooks/useActor.ts",
-    "frontend/src/hooks/useQueries.ts",
-    "frontend/src/pages/ChapterDetailPage.tsx",
-    "frontend/src/pages/ChaptersPage.tsx",
+    "frontend/src/components/learning-modes/run/LearningModeActivityRenderer.tsx",
+    "frontend/src/components/learning-modes/run/modes/FillBlanksMode.tsx",
+    "frontend/src/components/learning-modes/run/modes/FlashcardsMode.tsx",
+    "frontend/src/components/learning-modes/run/modes/MatchFollowingMode.tsx",
+    "frontend/src/components/learning-modes/run/modes/NotesSummaryMode.tsx",
+    "frontend/src/components/learning-modes/run/modes/PracticeProblemsMode.tsx",
+    "frontend/src/components/learning-modes/run/modes/QuizMode.tsx",
+    "frontend/src/components/learning-modes/run/modes/TimerChallengeMode.tsx",
+    "frontend/src/components/learning-modes/run/modes/TrueFalseMode.tsx",
+    "frontend/src/data/learningModeActivities.ts",
     "frontend/src/pages/LearningModeRunPage.tsx",
-    "frontend/src/pages/SettingsPage.tsx",
-    "frontend/src/utils/urlParams.ts",
     "project_state.json"
   ]
 }

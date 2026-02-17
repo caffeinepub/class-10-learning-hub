@@ -1,96 +1,97 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Class 10 Learning Hub — Learning Modes access fixes, new subjects, and Premium upgrade UI",
+  "title": "Interactive, mode-specific Learning Mode Run content (all 20 modes)",
   "requirements": [
     {
-      "id": "REQ-7",
-      "summary": "Ensure Learning Modes navigation works from all entry points and the Learning Mode Run page renders reliably for every predefined modeId, including preserving chapter context (subject + chapterId) when provided.",
+      "id": "REQ-10",
+      "summary": "Replace LearningModeRunPage placeholder with real, mode-specific interactive learning content for all 20 predefined learning mode IDs.",
       "acceptanceCriteria": [
-        "Clicking “Learning Modes” in the primary navigation opens the Learning Modes page.",
-        "Clicking “Explore Modes” on the Home page opens the Learning Modes page.",
-        "Clicking “Start” on any Learning Mode card navigates to /learning-modes/{modeId} and renders the run page (no blank page, no console errors).",
-        "From any Chapter Detail page, selecting any learning mode navigates to the run page and preserves the selected chapter context (subject and chapterId visible on the run page when provided)."
+        "Navigating to /learning-modes/$modeId for each of the 20 learningModes renders mode-specific UI (not the generic placeholder block currently shown in LearningModeRunPage).",
+        "Each mode includes at least one interactive control (e.g., selectable answer choices, flip/reveal, check answer, next/previous, timer start/stop) that changes UI state.",
+        "No console errors occur when launching any mode from Learning Modes list or Chapter Detail page."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/data/learningModeActivities.ts",
+          "operation": "create",
+          "description": "Create a local, offline activity/config registry for all 20 learningModes (keyed by modeId) that provides mode-specific prompts, sample items, and per-mode interaction type(s) (e.g., flashcard flip set, MCQ set, matching pairs, true/false statements, revision checklist, timer settings). This is the single source of truth used by the run UI to guarantee every modeId has non-placeholder content."
+        },
+        {
+          "path": "frontend/src/components/learning-modes/run/LearningModeActivityRenderer.tsx",
+          "operation": "create",
+          "description": "Add a renderer component that takes (modeId, optional chapterContext) and renders mode-specific interactive UI by selecting the matching activity config. Ensure each of the 20 modeIds includes at least one interactive control that updates React state (e.g., flip/reveal for flashcards, select+check for quiz/mcq, input+check for fill-blanks, pair selection for match, toggle for true-false, start/stop timer for speed-test/exam-prep, next/previous navigation for revision/summary/notes). Compose (do not modify) shadcn-ui components (e.g., Card, Button, Badge, Alert, etc.) to build the UI. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/learning-modes/run/modes/FlashcardsMode.tsx",
+          "operation": "create",
+          "description": "Implement the Flashcards mode interactive UI (flip/reveal + next/previous). Compose shadcn-ui components; do not modify any files under frontend/src/components/ui. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/learning-modes/run/modes/QuizMode.tsx",
+          "operation": "create",
+          "description": "Implement Quiz/MCQ-style interactive UI (selectable choices + check answer + explanation reveal). Compose shadcn-ui components. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/learning-modes/run/modes/FillBlanksMode.tsx",
+          "operation": "create",
+          "description": "Implement Fill-in-the-Blanks UI (text input(s) + check + reveal correct). Compose shadcn-ui components. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/learning-modes/run/modes/MatchFollowingMode.tsx",
+          "operation": "create",
+          "description": "Implement Match-the-Following UI (select left term then right definition; track matches; reset). Compose shadcn-ui components. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/learning-modes/run/modes/TrueFalseMode.tsx",
+          "operation": "create",
+          "description": "Implement True/False UI (toggle selection + check + feedback). Compose shadcn-ui components. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/learning-modes/run/modes/TimerChallengeMode.tsx",
+          "operation": "create",
+          "description": "Implement timer-based interactive UI used by speed-test/exam-prep/challenge (start/stop/reset timer + progress feedback + next item). Compose shadcn-ui components. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/learning-modes/run/modes/NotesSummaryMode.tsx",
+          "operation": "create",
+          "description": "Implement interactive Notes/Summary-style UI (expand/collapse key points, mark-as-done checklist, or reveal sections) used by summary/notes/revision. Compose shadcn-ui components. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/learning-modes/run/modes/PracticeProblemsMode.tsx",
+          "operation": "create",
+          "description": "Implement Practice Problems UI (show problem -> user self-solution textarea -> reveal step-by-step solution -> next). Compose shadcn-ui components. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/LearningModeRunPage.tsx",
+          "operation": "modify",
+          "description": "Replace the current placeholder block inside the Learning Content card with the new LearningModeActivityRenderer so /learning-modes/$modeId always renders mode-specific interactive content for every modeId in frontend/src/data/learningModes.ts. Keep the existing breadcrumb/header, and ensure the page passes along resolved chapter context (if valid) to the renderer. Compose shadcn-ui components only; do not modify any files under frontend/src/components/ui. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "summary": "Support chapter-tailored learning mode content when subject/chapterId search params are provided; otherwise show a usable mode landing state with a working Choose a Chapter CTA and safe fallback for invalid params.",
+      "acceptanceCriteria": [
+        "Launching a learning mode from ChapterDetailPage (which passes subject and chapterId) shows content that references the selected chapter (e.g., chapter title/number) within the mode’s main content area.",
+        "Launching a learning mode from LearningModesPage without a chapter selected does not show the broken/empty placeholder; it shows a usable mode landing state plus a working 'Choose a Chapter' button linking to /chapters.",
+        "Invalid subject/chapterId values in the URL do not crash the page; the UI falls back to the non-chapter mode landing state and still renders mode-specific UI."
       ],
       "file_operations": [
         {
           "path": "frontend/src/pages/LearningModeRunPage.tsx",
           "operation": "modify",
-          "description": "Harden route param/search handling so /learning-modes/$modeId always resolves a mode from the predefined list and renders without runtime errors; ensure chapter context is parsed consistently from the URL search params and displayed when provided. Use shadcn-ui components already in use for error/empty states (verify the component's usage instructions before implementing)."
+          "description": "Harden chapter-context resolution: treat chapter context as valid only when both subject is known and chapterId resolves to a real chapter; otherwise set chapter context to undefined and render a non-chapter landing state. Ensure the UI clearly indicates that chapter selection is required for chapter-specific practice (e.g., an inline Alert/Badge near the activity area), while still rendering mode-specific interactive content. Keep and wire a working 'Choose a Chapter' Link/Button to /chapters when chapter context is missing. Compose shadcn-ui components (Alert, Badge, Button, Card) without editing frontend/src/components/ui. Verify the component's usage instructions before implementing."
         },
         {
-          "path": "frontend/src/pages/LearningModesPage.tsx",
+          "path": "frontend/src/data/learningModeActivities.ts",
           "operation": "modify",
-          "description": "Verify and, if needed, align Learning Mode card navigation to always pass a valid modeId from the predefined list and avoid any invalid/empty param states that could cause the run page to mis-render. Continue using shadcn-ui Button/Card composition (verify the component's usage instructions before implementing)."
+          "description": "Extend activity config to accept optional chapterContext inputs (subject name + chapter number/title) and generate chapter-tailored strings/content variants when provided (e.g., headings, prompts, example questions referencing the chapter title). Ensure every mode has a meaningful non-chapter fallback variant to avoid empty/placeholder UI."
         },
         {
-          "path": "frontend/src/pages/ChapterDetailPage.tsx",
+          "path": "frontend/src/components/learning-modes/run/LearningModeActivityRenderer.tsx",
           "operation": "modify",
-          "description": "Ensure Chapter Detail learning mode launch links consistently include chapter context (subject + chapterId) in the navigation search params and that the values match the subject ids used by the chapter catalog. Continue using shadcn-ui Button/Card/Badge/Breadcrumb composition (verify the component's usage instructions before implementing)."
-        },
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Validate TanStack Router route definitions for learning modes and run pages are correctly registered and compatible with any tightened param/search usage in the LearningModeRunPage. Keep routing wiring complete so all entry points resolve. (Verify TanStack Router usage patterns before implementing.)"
-        }
-      ]
-    },
-    {
-      "id": "REQ-8",
-      "summary": "Add two new subjects (English Grammar, Hindi Vyakaran) with complete chapter/topic lists and ensure they work across chapters browsing, chapter detail routing, and chapter-driven learning mode launch.",
-      "acceptanceCriteria": [
-        "The Chapters page shows two additional selectable subjects: “English Grammar” and “Hindi Vyakaran”.",
-        "Each of the two new subjects displays its full chapter/topic list with chapter numbering, and each chapter opens a Chapter Detail page.",
-        "Learning modes can be launched from the new subjects’ Chapter Detail pages the same way as existing subjects (navigating to the run page with subject + chapterId in context)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/data/ncertClass10Chapters.ts",
-          "operation": "modify",
-          "description": "Extend the chapter catalog by adding two new subjects (“English Grammar”, “Hindi Vyakaran”) and their full chapter/topic lists with stable ids and numbering, so they can be used everywhere the subject list and chapter routing are used."
-        },
-        {
-          "path": "frontend/src/pages/ChaptersPage.tsx",
-          "operation": "modify",
-          "description": "Update the Chapters tabs layout to accommodate the increased number of subjects (e.g., responsive grid sizing) while keeping selection behavior intact. Continue using shadcn-ui Tabs composition without modifying files under frontend/src/components/ui (verify the component's usage instructions before implementing)."
-        },
-        {
-          "path": "frontend/src/pages/ChapterDetailPage.tsx",
-          "operation": "modify",
-          "description": "Confirm Chapter Detail rendering works for the two new subjects and that learning mode launch from these subjects passes correct subject + chapterId context to the run page. Continue using shadcn-ui components via composition (verify the component's usage instructions before implementing)."
-        }
-      ]
-    },
-    {
-      "id": "REQ-9",
-      "summary": "Add a Premium/Upgrade section in Settings with an in-app upgrade flow UI that uses Internet Identity login when required and reflects/persists Premium status per principal via backend actor calls.",
-      "acceptanceCriteria": [
-        "Settings includes a clearly labeled section for Premium (e.g., “Premium” / “Upgrade”).",
-        "The user can initiate an “Upgrade to Premium” flow from within the app UI.",
-        "After upgrading, the app shows the user as Premium (e.g., a badge/label in the Premium section) and this state persists across reloads and sessions for the same Internet Identity principal.",
-        "Backend exposes APIs to read the caller’s Premium status and to set Premium status for the caller (with appropriate access control so a user can only affect their own status).",
-        "The app works when not logged in: it should prompt the user to log in with Internet Identity before completing an upgrade, while still allowing browsing of existing content."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/hooks/usePremium.ts",
-          "operation": "create",
-          "description": "Create a React Query-based hook that reads the current user's Premium status (when an actor is available) and provides an upgrade action that calls the backend actor’s Premium upgrade capability. This should support persistence per Internet Identity principal by relying on backend state. (Uses core-infrastructure hooks like useActor/useInternetIdentity; verify component/library usage instructions before implementing.)"
-        },
-        {
-          "path": "frontend/src/components/settings/PremiumSettingsCard.tsx",
-          "operation": "create",
-          "description": "Add a Settings UI card for Premium/Upgrade that: shows current Premium status, offers an “Upgrade to Premium” button, and prompts the user to log in with Internet Identity before attempting upgrade when not authenticated. Use shadcn-ui components (Card/Button/Badge and any alert/dialog primitives as needed) via composition only—do not modify frontend/src/components/ui. Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/pages/SettingsPage.tsx",
-          "operation": "modify",
-          "description": "Wire the PremiumSettingsCard into Settings as a clearly labeled Premium/Upgrade section while keeping existing settings categories intact. Ensure browsing remains available when logged out, and only the upgrade completion is gated by Internet Identity login. Continue using shadcn-ui components via composition (verify the component's usage instructions before implementing)."
-        },
-        {
-          "path": "frontend/src/hooks/useQueries.ts",
-          "operation": "modify",
-          "description": "Optionally centralize Premium-related React Query helpers (query keys/utilities) or re-export hooks for consistent usage across the app, without changing immutable authentication/actor hooks. Verify React Query usage patterns before implementing."
+          "description": "Update renderer to (1) display chapter-aware labels/prompts in the main content area when chapterContext is present, and (2) show a clear chapter-required hint state when missing, without hiding the mode-specific interactive component. Verify the component's usage instructions before implementing."
         }
       ]
     }

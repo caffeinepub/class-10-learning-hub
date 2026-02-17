@@ -1,13 +1,13 @@
 # Specification
 
 ## Summary
-**Goal:** Restore reliable access to all Learning Modes entry points, expand the chapter catalog with English Grammar and Hindi Vyakaran, and add an in-app Premium upgrade option with persistent status per Internet Identity user.
+**Goal:** Replace the Learning Mode Run page placeholder with real, mode-specific learning content and at least one interactive element for every predefined learning mode, with appropriate behavior when chapter context is present or missing.
 
 **Planned changes:**
-- Fix Learning Modes navigation and mode launching so it works from primary navigation, Home quick-access, the Learning Modes list Start buttons, and Chapter Detail Start Learning buttons.
-- Ensure the Learning Mode Run page renders without errors for every predefined modeId and that it preserves subject + chapterId context when launched from a chapter.
-- Add two new subjects (“English Grammar” and “Hindi Vyakaran”) with complete chapter/topic lists, chapter numbering, and working Chapter Detail routing.
-- Implement a Premium/Upgrade section in Settings with an in-app upgrade flow that requires Internet Identity login to complete.
-- Add backend APIs to read and set the caller’s Premium status with access control, and persist Premium status keyed by the user’s Internet Identity principal.
+- Update the Learning Mode Run page to render mode-specific UI for all 20 predefined `modeId`s instead of the current generic placeholder block.
+- Ensure each learning mode includes at least one interactive control that changes UI state (e.g., reveal/flip, selectable choices, check answer, next/previous, timer start/stop).
+- Add chapter-aware rendering when `subject` and `chapterId` are provided via URL search params, referencing the selected chapter in the mode content.
+- When chapter context is missing (or invalid), show a usable mode landing state that clearly indicates chapter selection is required for chapter-specific practice, and provide a working “Choose a Chapter” button linking to `/chapters`.
+- Prevent crashes and console errors for any mode launch path (from Learning Modes list or Chapter Detail page), including invalid `subject`/`chapterId` values.
 
-**User-visible outcome:** Users can open and start any Learning Mode from anywhere in the app without errors, browse and launch learning modes for the new English Grammar and Hindi Vyakaran chapter lists, and upgrade to Premium from Settings (with Premium status saved for their logged-in Internet Identity across sessions).
+**User-visible outcome:** Opening any learning mode shows a working, mode-specific experience (not a placeholder), includes at least one interactive element, and properly adapts to whether a chapter is selected (with a clear chapter-selection call-to-action when needed).

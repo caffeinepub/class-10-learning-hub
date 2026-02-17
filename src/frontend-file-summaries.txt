@@ -6,7 +6,7 @@
   "frontend/src/pages/ChaptersPage.tsx": "Chapters browser with horizontally scrollable tabbed interface for seven subjects, displaying complete chapter lists per subject with responsive layout.",
   "frontend/src/pages/ChapterDetailPage.tsx": "Chapter detail view with enhanced error handling, showing breadcrumb navigation, chapter metadata with subject and number badges, and grid of 20 learning mode launchers with chapter context.",
   "frontend/src/pages/LearningModesPage.tsx": "Learning modes gallery displaying all 20 modes in a responsive grid with icons, names, descriptions, and start buttons that navigate to the run page.",
-  "frontend/src/pages/LearningModeRunPage.tsx": "Learning mode execution screen with enhanced error handling, showing active mode with icon, description, optional chapter context badge, and placeholder content area ready for interactive learning.",
+  "frontend/src/pages/LearningModeRunPage.tsx": "Learning mode execution page with breadcrumb navigation, mode header with icon, optional chapter context badge, chapter-required hint for general mode, and interactive activity renderer replacing the previous placeholder.",
   "frontend/src/components/chapters/ChapterList.tsx": "Reusable chapter list component rendering subject header and clickable chapter cards with numbers and titles.",
   "frontend/src/components/learning-modes/LearningModeIcon.tsx": "Icon component that displays learning mode icons from the generated sprite sheet using CSS background positioning.",
   "frontend/src/components/settings/SettingsCategorySection.tsx": "Settings category renderer that displays toggle switches, select dropdowns, and sliders for all settings in a category with labels and descriptions.",
@@ -19,5 +19,15 @@
   "frontend/src/index.css": "Global styles with OKLCH color system defining academic-themed palette (deep teal primary, warm amber secondary, vibrant coral accent), CSS variables for content settings, and high-contrast/compact mode support.",
   "frontend/tailwind.config.js": "Tailwind configuration extending theme with custom colors mapped to CSS variables, border radius tokens, custom shadows, and academic-friendly font stack.",
   "frontend/src/components/settings/PremiumSettingsCard.tsx": "Premium settings card component displaying Premium status, upgrade button with Internet Identity login integration, and list of Premium benefits with visual indicators.",
-  "frontend/src/pages/SettingsPage.tsx": "Settings page featuring Premium upgrade card at the top followed by all settings categories, allowing users to manage Premium subscription and customize learning experience."
+  "frontend/src/pages/SettingsPage.tsx": "Settings page featuring Premium upgrade card at the top followed by all settings categories, allowing users to manage Premium subscription and customize learning experience.",
+  "frontend/src/data/learningModeActivities.ts": "Activity configuration registry providing mode-specific content generators for all 20 learning modes, with support for optional chapter context to tailor content to specific subjects and chapters.",
+  "frontend/src/components/learning-modes/run/modes/FlashcardsMode.tsx": "Interactive flashcard component with flip animation, showing question/answer pairs with navigation controls for previous/next cards.",
+  "frontend/src/components/learning-modes/run/modes/QuizMode.tsx": "Multiple-choice quiz component with selectable options, answer checking, instant feedback, score tracking, and explanations.",
+  "frontend/src/components/learning-modes/run/modes/FillBlanksMode.tsx": "Fill-in-the-blanks exercise component with text input, hint system, answer validation, and score tracking.",
+  "frontend/src/components/learning-modes/run/modes/MatchFollowingMode.tsx": "Interactive matching exercise where users connect terms with definitions by clicking pairs, with shuffled options and completion tracking.",
+  "frontend/src/components/learning-modes/run/modes/TrueFalseMode.tsx": "True/False statement component with large button selection, instant feedback, explanations, and score tracking.",
+  "frontend/src/components/learning-modes/run/modes/TimerChallengeMode.tsx": "Timed challenge component with countdown timer, start/pause/reset controls, progress tracking, and question navigation for speed tests and exam prep.",
+  "frontend/src/components/learning-modes/run/modes/NotesSummaryMode.tsx": "Notes and summary component with expandable sections, checkable key points, and progress tracking for revision and study notes.",
+  "frontend/src/components/learning-modes/run/modes/PracticeProblemsMode.tsx": "Practice problems component with problem statements, user solution textarea, and toggleable step-by-step solutions for self-paced learning.",
+  "frontend/src/components/learning-modes/run/LearningModeActivityRenderer.tsx": "Activity renderer that selects and renders the appropriate interactive component based on mode ID and activity type, with error handling for unknown configurations."
 }

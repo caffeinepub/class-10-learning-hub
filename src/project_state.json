@@ -1,10 +1,11 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 5,
+  "projectStateVersion": 7,
   "summary": "Build a Class 10 learning app covering all NCERT chapters, offering 20 learning modes and a Settings area with 30+ adjustable options.",
   "architectural_notes": [],
   "known_issues": [
-    "Learning modes are not accessible (cannot be opened/launched from the app UI)."
+    "Learning modes are not accessible (cannot be opened/launched from the app UI).",
+    "Learning modes open but only show placeholder text ('This learning mode is ready for you...') instead of actual content/interactions."
   ],
   "isFixRequest": true,
   "existing_features": [
@@ -77,6 +78,22 @@
       "title": "Add an in-app purchase (IAP) option that allows users to upgrade to a Premium status within the app UI, including a clear Premium/Upgrade entry point in Settings and persistent storage of the user’s Premium status keyed by their Internet Identity principal.",
       "reqIds": [
         "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-placeholder-content-in-the-learning-mode-run-page-so-that-opening-any-learning-mode-shows-real-mode-specific-learning-content-and-at-least-one-interactive-element-not-just-the-message-this-learning-mode-is-ready-for-you-the-experience-must-work-for-all-20-predefined-modeids-in-frontend-src-data-learningmodes-ts",
+      "title": "Replace the placeholder content in the Learning Mode Run page so that opening any learning mode shows real, mode-specific learning content and at least one interactive element (not just the message 'This learning mode is ready for you...'). The experience must work for all 20 predefined modeIds in frontend/src/data/learningModes.ts.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-when-a-chapter-context-is-provided-via-search-params-subject-and-chapterid-show-chapter-tailored-content-for-the-selected-learning-mode-when-chapter-context-is-missing-keep-the-existing-choose-a-chapter-call-to-action-and-ensure-the-mode-ui-clearly-indicates-that-chapter-selection-is-required-for-chapter-specific-practice",
+      "title": "When a chapter context is provided (via search params subject and chapterId), show chapter-tailored content for the selected learning mode; when chapter context is missing, keep the existing 'Choose a Chapter' call-to-action and ensure the mode UI clearly indicates that chapter selection is required for chapter-specific practice.",
+      "reqIds": [
+        "REQ-11"
       ],
       "version": 1
     }
