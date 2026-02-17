@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.75rem;
+        
+        /* Academic color palette - warm and inviting */
+        --background: 0.98 0.01 60;
+        --foreground: 0.20 0.02 60;
+        --card: 1 0 0;
+        --card-foreground: 0.20 0.02 60;
+        --popover: 1 0 0;
+        --popover-foreground: 0.20 0.02 60;
+        
+        /* Primary: Deep teal for trust and focus */
+        --primary: 0.45 0.12 200;
+        --primary-foreground: 0.98 0.01 200;
+        
+        /* Secondary: Warm amber for energy */
+        --secondary: 0.92 0.03 80;
+        --secondary-foreground: 0.30 0.02 80;
+        
+        /* Muted: Soft neutral */
+        --muted: 0.95 0.01 60;
+        --muted-foreground: 0.50 0.02 60;
+        
+        /* Accent: Vibrant coral for highlights */
+        --accent: 0.70 0.15 25;
+        --accent-foreground: 0.98 0.01 25;
+        
+        --destructive: 0.55 0.22 25;
+        --destructive-foreground: 0.98 0.01 25;
+        
+        --border: 0.90 0.01 60;
+        --input: 0.90 0.01 60;
+        --ring: 0.45 0.12 200;
+        
+        --chart-1: 0.60 0.18 200;
+        --chart-2: 0.65 0.16 150;
+        --chart-3: 0.70 0.15 25;
+        --chart-4: 0.55 0.14 280;
+        --chart-5: 0.75 0.12 50;
+        
+        /* Content settings */
+        --content-font-size: 16px;
+        --content-line-height: 1.6;
+        --animation-duration: 200ms;
+    }
+
+    .dark {
+        --background: 0.15 0.02 240;
+        --foreground: 0.95 0.01 60;
+        --card: 0.20 0.02 240;
+        --card-foreground: 0.95 0.01 60;
+        --popover: 0.18 0.02 240;
+        --popover-foreground: 0.95 0.01 60;
+        
+        /* Primary: Bright teal for dark mode */
+        --primary: 0.70 0.15 200;
+        --primary-foreground: 0.15 0.02 200;
+        
+        /* Secondary: Muted in dark */
+        --secondary: 0.25 0.02 240;
+        --secondary-foreground: 0.95 0.01 60;
+        
+        --muted: 0.25 0.02 240;
+        --muted-foreground: 0.65 0.02 60;
+        
+        /* Accent: Softer coral for dark mode */
+        --accent: 0.65 0.18 25;
+        --accent-foreground: 0.98 0.01 25;
+        
+        --destructive: 0.60 0.20 25;
+        --destructive-foreground: 0.15 0.02 25;
+        
+        --border: 0.30 0.02 240;
+        --input: 0.30 0.02 240;
+        --ring: 0.70 0.15 200;
+        
+        --chart-1: 0.65 0.16 200;
+        --chart-2: 0.70 0.14 150;
+        --chart-3: 0.65 0.18 25;
+        --chart-4: 0.60 0.16 280;
+        --chart-5: 0.75 0.14 50;
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+        font-size: var(--content-font-size);
+        line-height: var(--content-line-height);
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 700;
+        line-height: 1.2;
+    }
+    
+    /* High contrast mode */
+    .high-contrast {
+        --border: 0.40 0.05 60;
+        --input: 0.40 0.05 60;
+    }
+    
+    .high-contrast.dark {
+        --border: 0.60 0.05 60;
+        --input: 0.60 0.05 60;
+    }
+    
+    /* Compact mode */
+    .compact-mode {
+        --content-line-height: 1.4;
+    }
+    
+    /* Smooth transitions */
+    * {
+        transition-duration: var(--animation-duration);
+    }
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+}

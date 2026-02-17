@@ -1,0 +1,23 @@
+{
+  "frontend/src/App.tsx": "Main application component that sets up TanStack Router with routes for all pages, wrapped in QueryClientProvider, ThemeProvider, and AppLayout with Toaster for notifications.",
+  "frontend/src/components/layout/AppLayout.tsx": "Shared layout component providing consistent header with navigation, main content area, and footer with attribution across all pages.",
+  "frontend/src/components/nav/PrimaryNav.tsx": "Primary navigation component with logo, desktop menu, and mobile sheet drawer, highlighting active routes.",
+  "frontend/src/pages/HomePage.tsx": "Home dashboard featuring hero banner with generated image, quick access cards to main sections, and features overview highlighting app capabilities.",
+  "frontend/src/pages/ChaptersPage.tsx": "Chapters browser with horizontally scrollable tabbed interface for seven subjects, displaying complete chapter lists per subject with responsive layout.",
+  "frontend/src/pages/ChapterDetailPage.tsx": "Chapter detail view with enhanced error handling, showing breadcrumb navigation, chapter metadata with subject and number badges, and grid of 20 learning mode launchers with chapter context.",
+  "frontend/src/pages/LearningModesPage.tsx": "Learning modes gallery displaying all 20 modes in a responsive grid with icons, names, descriptions, and start buttons that navigate to the run page.",
+  "frontend/src/pages/LearningModeRunPage.tsx": "Learning mode execution screen with enhanced error handling, showing active mode with icon, description, optional chapter context badge, and placeholder content area ready for interactive learning.",
+  "frontend/src/components/chapters/ChapterList.tsx": "Reusable chapter list component rendering subject header and clickable chapter cards with numbers and titles.",
+  "frontend/src/components/learning-modes/LearningModeIcon.tsx": "Icon component that displays learning mode icons from the generated sprite sheet using CSS background positioning.",
+  "frontend/src/components/settings/SettingsCategorySection.tsx": "Settings category renderer that displays toggle switches, select dropdowns, and sliders for all settings in a category with labels and descriptions.",
+  "frontend/src/data/ncertClass10Chapters.ts": "Structured data defining all Class 10 NCERT chapters across seven subjects (Mathematics, Science, Social Science, English, Hindi, English Grammar with 18 topics, and Hindi Vyakaran with 20 topics) with 130+ total chapters.",
+  "frontend/src/data/learningModes.ts": "Structured data defining exactly 20 learning modes with unique IDs, names, and descriptions covering various study methods from flashcards to daily challenges.",
+  "frontend/src/settings/settingsSchema.ts": "Complete settings schema defining 34 adjustable options across six categories (Learning, Practice/Quiz, Display, Accessibility, Notifications, Privacy) with types, defaults, and options.",
+  "frontend/src/settings/useSettings.ts": "Custom React hook managing settings state with localStorage persistence, providing getters/setters and reset functionality.",
+  "frontend/src/settings/applySettings.ts": "Helper function that applies UI-impacting settings immediately (dark mode, font size, line spacing, high contrast, reduced motion, compact mode) via CSS variables and classes.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks managing backend operations for user profiles and Premium status, including queries for fetching Premium status and mutations for upgrading to Premium.",
+  "frontend/src/index.css": "Global styles with OKLCH color system defining academic-themed palette (deep teal primary, warm amber secondary, vibrant coral accent), CSS variables for content settings, and high-contrast/compact mode support.",
+  "frontend/tailwind.config.js": "Tailwind configuration extending theme with custom colors mapped to CSS variables, border radius tokens, custom shadows, and academic-friendly font stack.",
+  "frontend/src/components/settings/PremiumSettingsCard.tsx": "Premium settings card component displaying Premium status, upgrade button with Internet Identity login integration, and list of Premium benefits with visual indicators.",
+  "frontend/src/pages/SettingsPage.tsx": "Settings page featuring Premium upgrade card at the top followed by all settings categories, allowing users to manage Premium subscription and customize learning experience."
+}

@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 5,
+  "summary": "Build a Class 10 learning app covering all NCERT chapters, offering 20 learning modes and a Settings area with 30+ adjustable options.",
+  "architectural_notes": [],
+  "known_issues": [
+    "Learning modes are not accessible (cannot be opened/launched from the app UI)."
+  ],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-create-the-core-app-information-architecture-for-a-class-10-ncert-learning-app-including-a-a-home-dashboard-b-a-chapters-area-that-organizes-all-class-10-ncert-chapters-by-subject-c-a-learning-modes-area-that-exposes-20-distinct-learning-modes-and-d-an-in-app-settings-area-accessible-from-primary-navigation",
+      "title": "Create the core app information architecture for a Class 10 NCERT learning app, including: (a) a Home dashboard, (b) a Chapters area that organizes all Class 10 NCERT chapters by subject, (c) a Learning Modes area that exposes 20 distinct learning modes, and (d) an in-app Settings area accessible from primary navigation.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-include-a-complete-class-10-ncert-chapter-catalog-in-the-app-ui-organized-by-subject-with-chapter-titles-and-chapter-numbering-at-minimum-cover-the-common-ncert-class-10-subjects-mathematics-science-social-science-english-and-hindi-with-each-subject-listing-its-chapters-as-selectable-items",
+      "title": "Include a complete Class 10 NCERT chapter catalog in the app UI, organized by subject with chapter titles and chapter numbering. At minimum, cover the common NCERT Class 10 subjects: Mathematics, Science, Social Science, English, and Hindi, with each subject listing its chapters as selectable items.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-20-distinct-learning-modes-and-present-them-as-a-browsable-list-grid-each-mode-must-have-name-short-description-and-a-start-action-modes-must-be-launchable-from-a-the-learning-modes-area-and-b-from-a-chapter-detail-page-pre-selecting-that-chapter",
+      "title": "Implement 20 distinct learning modes and present them as a browsable list/grid. Each mode must have: name, short description, and a start action. Modes must be launchable from (a) the Learning Modes area and (b) from a Chapter detail page (pre-selecting that chapter).",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-in-app-settings-section-containing-30-adjustable-settings-options-grouped-into-logical-categories-e-g-learning-practice-quiz-content-display-accessibility-notifications-reminders-local-only-privacy-data-settings-must-include-a-mix-of-toggles-dropdowns-and-sliders-and-must-be-editable-by-the-user",
+      "title": "Add an in-app Settings section containing 30+ adjustable settings options, grouped into logical categories (e.g., Learning, Practice/Quiz, Content Display, Accessibility, Notifications/Reminders (local-only), Privacy/Data). Settings must include a mix of toggles, dropdowns, and sliders, and must be editable by the user.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-define-and-apply-one-coherent-creative-visual-theme-colors-typography-spacing-components-style-suitable-for-a-class-10-study-app-and-enforce-it-consistently-across-home-chapters-learning-modes-and-settings-screens",
+      "title": "Define and apply one coherent, creative visual theme (colors, typography, spacing, components style) suitable for a Class 10 study app, and enforce it consistently across Home, Chapters, Learning Modes, and Settings screens.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-basic-offline-friendly-behavior-for-the-chapter-catalog-learning-modes-list-and-settings-so-the-app-remains-usable-after-initial-load-no-external-apis-required-for-core-navigation-and-settings",
+      "title": "Add basic offline-friendly behavior for the chapter catalog, learning modes list, and settings so the app remains usable after initial load (no external APIs required for core navigation and settings).",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-issue-where-learning-modes-are-not-accessible-by-ensuring-that-learning-modes-navigation-and-launching-a-mode-works-from-all-entry-points-primary-navigation-home-quick-access-card-learning-modes-list-start-button-and-chapter-detail-start-learning-buttons-and-that-the-learning-mode-run-page-renders-without-errors-for-every-modeid-in-the-predefined-list",
+      "title": "Fix the issue where Learning Modes are not accessible by ensuring that Learning Modes navigation and launching a mode works from all entry points (Primary navigation, Home quick-access card, Learning Modes list Start button, and Chapter Detail Start Learning buttons), and that the Learning Mode Run page renders without errors for every modeId in the predefined list.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-two-new-subjects-to-the-chapter-catalog-english-grammar-and-hindi-vyakaran-including-a-complete-chapter-topic-list-for-each-subject-and-make-them-fully-usable-anywhere-the-subject-list-appears-chapters-tabs-list-chapter-detail-routing-and-any-chapter-driven-learning-mode-launch",
+      "title": "Add two new subjects to the chapter catalog—“English Grammar” and “Hindi Vyakaran”—including a complete chapter/topic list for each subject, and make them fully usable anywhere the subject list appears (Chapters tabs/list, Chapter detail routing, and any chapter-driven learning mode launch).",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-in-app-purchase-iap-option-that-allows-users-to-upgrade-to-a-premium-status-within-the-app-ui-including-a-clear-premium-upgrade-entry-point-in-settings-and-persistent-storage-of-the-user-s-premium-status-keyed-by-their-internet-identity-principal",
+      "title": "Add an in-app purchase (IAP) option that allows users to upgrade to a Premium status within the app UI, including a clear Premium/Upgrade entry point in Settings and persistent storage of the user’s Premium status keyed by their Internet Identity principal.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Include all Class 10 NCERT chapters/content coverage in the app",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Provide 20 distinct learning modes for studying/practice",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Add an in-app Settings section with 30+ adjustable settings options",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Add in-app purchase option (premium/unlock features)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Add 2 more subjects with full NCERT chapters: English Grammar and Hindi Vyakaran",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Class 10 Learning Hub",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

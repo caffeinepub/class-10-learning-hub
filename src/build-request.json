@@ -1,0 +1,80 @@
+{
+  "kind": "build_request",
+  "title": "Fix Learning Modes access, add premium in-app purchase option, and expand subjects (English Grammar & Hindi Vyakaran)",
+  "projectName": "Class 10 Learning Hub",
+  "priority": "high",
+  "requirements": [
+    {
+      "id": "REQ-7",
+      "text": "Fix the issue where Learning Modes are not accessible by ensuring that Learning Modes navigation and launching a mode works from all entry points (Primary navigation, Home quick-access card, Learning Modes list Start button, and Chapter Detail Start Learning buttons), and that the Learning Mode Run page renders without errors for every modeId in the predefined list.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-3"
+        ],
+        "quotes": [
+          "Learning modes are not accessible"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Clicking “Learning Modes” in the primary navigation opens the Learning Modes page.",
+        "Clicking “Explore Modes” on the Home page opens the Learning Modes page.",
+        "Clicking “Start” on any Learning Mode card navigates to /learning-modes/{modeId} and renders the run page (no blank page, no console errors).",
+        "From any Chapter Detail page, selecting any learning mode navigates to the run page and preserves the selected chapter context (subject and chapterId visible on the run page when provided)."
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Add two new subjects to the chapter catalog—“English Grammar” and “Hindi Vyakaran”—including a complete chapter/topic list for each subject, and make them fully usable anywhere the subject list appears (Chapters tabs/list, Chapter detail routing, and any chapter-driven learning mode launch).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-3"
+        ],
+        "quotes": [
+          "add 2more subjects with all NCERT chapters english grammar and hindi vyakran"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The Chapters page shows two additional selectable subjects: “English Grammar” and “Hindi Vyakaran”.",
+        "Each of the two new subjects displays its full chapter/topic list with chapter numbering, and each chapter opens a Chapter Detail page.",
+        "Learning modes can be launched from the new subjects’ Chapter Detail pages the same way as existing subjects (navigating to the run page with subject + chapterId in context)."
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Add an in-app purchase (IAP) option that allows users to upgrade to a Premium status within the app UI, including a clear Premium/Upgrade entry point in Settings and persistent storage of the user’s Premium status keyed by their Internet Identity principal.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-3"
+        ],
+        "quotes": [
+          "add in app purchase option"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Settings includes a clearly labeled section for Premium (e.g., “Premium” / “Upgrade”).",
+        "The user can initiate an “Upgrade to Premium” flow from within the app UI.",
+        "After upgrading, the app shows the user as Premium (e.g., a badge/label in the Premium section) and this state persists across reloads and sessions for the same Internet Identity principal.",
+        "Backend exposes APIs to read the caller’s Premium status and to set Premium status for the caller (with appropriate access control so a user can only affect their own status).",
+        "The app works when not logged in: it should prompt the user to log in with Internet Identity before completing an upgrade, while still allowing browsing of existing content."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not edit files under frontend/src/components/ui (Shadcn UI components must be composed, not modified).",
+    "Do not modify immutable hook files: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx.",
+    "Backend must remain a single Motoko actor with logic in backend/main.mo; add backend/migration.mo only if state upgrades require it.",
+    "Use English for any new user-facing text added by these changes."
+  ],
+  "nonGoals": [
+    "Integrating third-party mobile app store purchases (Google Play / App Store) is out of scope.",
+    "Implementing real payment processing (e.g., Stripe) is out of scope unless credentials and product/price configuration are provided.",
+    "Adding new learning modes beyond the existing 20 is out of scope."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

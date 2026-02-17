@@ -1,0 +1,91 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-17T01:29:48.832Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 3,
+    "implemented": 3,
+    "items": [
+      {
+        "id": "REQ-7",
+        "summary": "Fix the issue where Learning Modes are not accessible by ensuring that Learning Modes navigation and launching a mode works from all entry points (Primary navigation, Home quick-access card, Learning Modes list Start button, and Chapter Detail Start Learning buttons), and that the Learning Mode Run page renders without errors for every modeId in the predefined list.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/LearningModeRunPage.tsx",
+          "frontend/src/pages/LearningModesPage.tsx",
+          "frontend/src/pages/ChapterDetailPage.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/LearningModeRunPage.tsx",
+          "frontend/src/pages/ChapterDetailPage.tsx",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-8",
+        "summary": "Add two new subjects to the chapter catalog—“English Grammar” and “Hindi Vyakaran”—including a complete chapter/topic list for each subject, and make them fully usable anywhere the subject list appears (Chapters tabs/list, Chapter detail routing, and any chapter-driven learning mode launch).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/data/ncertClass10Chapters.ts",
+          "frontend/src/pages/ChaptersPage.tsx",
+          "frontend/src/pages/ChapterDetailPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/data/ncertClass10Chapters.ts",
+          "frontend/src/pages/ChaptersPage.tsx",
+          "frontend/src/pages/ChapterDetailPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-9",
+        "summary": "Add an in-app purchase (IAP) option that allows users to upgrade to a Premium status within the app UI, including a clear Premium/Upgrade entry point in Settings and persistent storage of the user’s Premium status keyed by their Internet Identity principal.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/usePremium.ts",
+          "frontend/src/components/settings/PremiumSettingsCard.tsx",
+          "frontend/src/pages/SettingsPage.tsx",
+          "frontend/src/hooks/useQueries.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/settings/PremiumSettingsCard.tsx",
+          "frontend/src/pages/SettingsPage.tsx",
+          "frontend/src/hooks/useQueries.ts"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/authorization/MixinAuthorization.mo",
+    "backend/authorization/access-control.mo",
+    "backend/main.mo",
+    "build-request.json",
+    "build-template/README.md",
+    "caffeine.lock.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/App.tsx",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/settings/PremiumSettingsCard.tsx",
+    "frontend/src/data/ncertClass10Chapters.ts",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/pages/ChapterDetailPage.tsx",
+    "frontend/src/pages/ChaptersPage.tsx",
+    "frontend/src/pages/LearningModeRunPage.tsx",
+    "frontend/src/pages/SettingsPage.tsx",
+    "frontend/src/utils/urlParams.ts",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

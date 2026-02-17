@@ -1,0 +1,68 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-fix-the-issue-where-learning-modes-are-not-accessible-by-ensuring-that-learning-modes-navigation-and-launching-a-mode-works-from-all-entry-points-primary-navigation-home-quick-access-card-learning-modes-list-start-button-and-chapter-detail-start-learning-buttons-and-that-the-learning-mode-run-page-renders-without-errors-for-every-modeid-in-the-predefined-list",
+      "featureTitle": "Fix the issue where Learning Modes are not accessible by ensuring that Learning Modes navigation and launching a mode works from all entry points (Primary navigation, Home quick-access card, Learning Modes list Start button, and Chapter Detail Start Learning buttons), and that the Learning Mode Run page renders without errors for every modeId in the predefined list.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/ChapterDetailPage.tsx",
+        "frontend/src/pages/LearningModeRunPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-two-new-subjects-to-the-chapter-catalog-english-grammar-and-hindi-vyakaran-including-a-complete-chapter-topic-list-for-each-subject-and-make-them-fully-usable-anywhere-the-subject-list-appears-chapters-tabs-list-chapter-detail-routing-and-any-chapter-driven-learning-mode-launch",
+      "featureTitle": "Add two new subjects to the chapter catalog—“English Grammar” and “Hindi Vyakaran”—including a complete chapter/topic list for each subject, and make them fully usable anywhere the subject list appears (Chapters tabs/list, Chapter detail routing, and any chapter-driven learning mode launch).",
+      "files": [
+        "frontend/src/data/ncertClass10Chapters.ts",
+        "frontend/src/pages/ChapterDetailPage.tsx",
+        "frontend/src/pages/ChaptersPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-an-in-app-purchase-iap-option-that-allows-users-to-upgrade-to-a-premium-status-within-the-app-ui-including-a-clear-premium-upgrade-entry-point-in-settings-and-persistent-storage-of-the-user-s-premium-status-keyed-by-their-internet-identity-principal",
+      "featureTitle": "Add an in-app purchase (IAP) option that allows users to upgrade to a Premium status within the app UI, including a clear Premium/Upgrade entry point in Settings and persistent storage of the user’s Premium status keyed by their Internet Identity principal.",
+      "files": [
+        "frontend/src/components/settings/PremiumSettingsCard.tsx",
+        "frontend/src/hooks/useQueries.ts",
+        "frontend/src/pages/SettingsPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

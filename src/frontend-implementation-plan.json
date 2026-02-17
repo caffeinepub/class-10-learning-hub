@@ -1,0 +1,98 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Class 10 Learning Hub — Learning Modes access fixes, new subjects, and Premium upgrade UI",
+  "requirements": [
+    {
+      "id": "REQ-7",
+      "summary": "Ensure Learning Modes navigation works from all entry points and the Learning Mode Run page renders reliably for every predefined modeId, including preserving chapter context (subject + chapterId) when provided.",
+      "acceptanceCriteria": [
+        "Clicking “Learning Modes” in the primary navigation opens the Learning Modes page.",
+        "Clicking “Explore Modes” on the Home page opens the Learning Modes page.",
+        "Clicking “Start” on any Learning Mode card navigates to /learning-modes/{modeId} and renders the run page (no blank page, no console errors).",
+        "From any Chapter Detail page, selecting any learning mode navigates to the run page and preserves the selected chapter context (subject and chapterId visible on the run page when provided)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/LearningModeRunPage.tsx",
+          "operation": "modify",
+          "description": "Harden route param/search handling so /learning-modes/$modeId always resolves a mode from the predefined list and renders without runtime errors; ensure chapter context is parsed consistently from the URL search params and displayed when provided. Use shadcn-ui components already in use for error/empty states (verify the component's usage instructions before implementing)."
+        },
+        {
+          "path": "frontend/src/pages/LearningModesPage.tsx",
+          "operation": "modify",
+          "description": "Verify and, if needed, align Learning Mode card navigation to always pass a valid modeId from the predefined list and avoid any invalid/empty param states that could cause the run page to mis-render. Continue using shadcn-ui Button/Card composition (verify the component's usage instructions before implementing)."
+        },
+        {
+          "path": "frontend/src/pages/ChapterDetailPage.tsx",
+          "operation": "modify",
+          "description": "Ensure Chapter Detail learning mode launch links consistently include chapter context (subject + chapterId) in the navigation search params and that the values match the subject ids used by the chapter catalog. Continue using shadcn-ui Button/Card/Badge/Breadcrumb composition (verify the component's usage instructions before implementing)."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Validate TanStack Router route definitions for learning modes and run pages are correctly registered and compatible with any tightened param/search usage in the LearningModeRunPage. Keep routing wiring complete so all entry points resolve. (Verify TanStack Router usage patterns before implementing.)"
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Add two new subjects (English Grammar, Hindi Vyakaran) with complete chapter/topic lists and ensure they work across chapters browsing, chapter detail routing, and chapter-driven learning mode launch.",
+      "acceptanceCriteria": [
+        "The Chapters page shows two additional selectable subjects: “English Grammar” and “Hindi Vyakaran”.",
+        "Each of the two new subjects displays its full chapter/topic list with chapter numbering, and each chapter opens a Chapter Detail page.",
+        "Learning modes can be launched from the new subjects’ Chapter Detail pages the same way as existing subjects (navigating to the run page with subject + chapterId in context)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/data/ncertClass10Chapters.ts",
+          "operation": "modify",
+          "description": "Extend the chapter catalog by adding two new subjects (“English Grammar”, “Hindi Vyakaran”) and their full chapter/topic lists with stable ids and numbering, so they can be used everywhere the subject list and chapter routing are used."
+        },
+        {
+          "path": "frontend/src/pages/ChaptersPage.tsx",
+          "operation": "modify",
+          "description": "Update the Chapters tabs layout to accommodate the increased number of subjects (e.g., responsive grid sizing) while keeping selection behavior intact. Continue using shadcn-ui Tabs composition without modifying files under frontend/src/components/ui (verify the component's usage instructions before implementing)."
+        },
+        {
+          "path": "frontend/src/pages/ChapterDetailPage.tsx",
+          "operation": "modify",
+          "description": "Confirm Chapter Detail rendering works for the two new subjects and that learning mode launch from these subjects passes correct subject + chapterId context to the run page. Continue using shadcn-ui components via composition (verify the component's usage instructions before implementing)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Add a Premium/Upgrade section in Settings with an in-app upgrade flow UI that uses Internet Identity login when required and reflects/persists Premium status per principal via backend actor calls.",
+      "acceptanceCriteria": [
+        "Settings includes a clearly labeled section for Premium (e.g., “Premium” / “Upgrade”).",
+        "The user can initiate an “Upgrade to Premium” flow from within the app UI.",
+        "After upgrading, the app shows the user as Premium (e.g., a badge/label in the Premium section) and this state persists across reloads and sessions for the same Internet Identity principal.",
+        "Backend exposes APIs to read the caller’s Premium status and to set Premium status for the caller (with appropriate access control so a user can only affect their own status).",
+        "The app works when not logged in: it should prompt the user to log in with Internet Identity before completing an upgrade, while still allowing browsing of existing content."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/usePremium.ts",
+          "operation": "create",
+          "description": "Create a React Query-based hook that reads the current user's Premium status (when an actor is available) and provides an upgrade action that calls the backend actor’s Premium upgrade capability. This should support persistence per Internet Identity principal by relying on backend state. (Uses core-infrastructure hooks like useActor/useInternetIdentity; verify component/library usage instructions before implementing.)"
+        },
+        {
+          "path": "frontend/src/components/settings/PremiumSettingsCard.tsx",
+          "operation": "create",
+          "description": "Add a Settings UI card for Premium/Upgrade that: shows current Premium status, offers an “Upgrade to Premium” button, and prompts the user to log in with Internet Identity before attempting upgrade when not authenticated. Use shadcn-ui components (Card/Button/Badge and any alert/dialog primitives as needed) via composition only—do not modify frontend/src/components/ui. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/SettingsPage.tsx",
+          "operation": "modify",
+          "description": "Wire the PremiumSettingsCard into Settings as a clearly labeled Premium/Upgrade section while keeping existing settings categories intact. Ensure browsing remains available when logged out, and only the upgrade completion is gated by Internet Identity login. Continue using shadcn-ui components via composition (verify the component's usage instructions before implementing)."
+        },
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Optionally centralize Premium-related React Query helpers (query keys/utilities) or re-export hooks for consistent usage across the app, without changing immutable authentication/actor hooks. Verify React Query usage patterns before implementing."
+        }
+      ]
+    }
+  ]
+}
